@@ -1,6 +1,4 @@
-import Generadores.GeneradorGarantizadosRandomHastaLLenar;
-import Generadores.GeneradorGarantizadosRandom;
-import Generadores.GeneradorLineal;
+import Generadores.*;
 
 public class App {
     public static void main(String[] args) throws Exception {

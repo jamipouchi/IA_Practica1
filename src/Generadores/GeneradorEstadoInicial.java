@@ -18,7 +18,7 @@ public abstract class GeneradorEstadoInicial {
     protected double[] beneficioCentrales;
 
     protected Boolean[] centralesUsadas;
-    private final int NO_ASIGNADO = -1;
+    private static final int NO_ASIGNADO = -1;
 
     public void creaEstadoInicial(Clientes clientes, Centrales centrales) throws Exception {
         this.clientes = clientes;
