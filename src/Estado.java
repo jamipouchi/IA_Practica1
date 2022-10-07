@@ -62,39 +62,10 @@ public class Estado {
         Cliente c = clientes.get(numClient);
         Central ce = centrales.get(numCentral);
 
-        double perdues = calculaPerdues(c.getCoordX, c.getCoordY, ce.getCoordX, ce.getCoordY);
-        distribucionCentrales[numCentral] -= c.getConsumo()*(1 + perdues);
-        int tipusCentral = ce.getTipo();
-        int tipusClient = c.getTipo();
-        int contrato = c.getContrato();
-
-        if(ultimClient(numCentral, asignacionClientes)){
-          if(tipusCentral == 0) beneficioCentrales[numCentral] = -15000;
-          else if(tipusCentral == 1) beneficioCentrales[numCentral] = -5000;
-          else beneficioCentrales[numCentral] = -1500;
-        }
-        else {
-          if(tipusClient == 0) beneficioCentrales[numCentral] -= c.getConsumo()*(400-100*contrato);
-          else if(tipusClient == 1) beneficioCentrales[numCentral] -= c.getConsumo()*(500-100*contrato);
-          else beneficioCentrales[numCentral] -= c.getConsumo()*(600-100*contrato);
-        }
+        double consumClient = produccionNecesariaToClienteFromCentral(c, ce);
+        distribucionCentrales[numCentral] -= consumClient;
+        if(c.getContrato() == Cliente.GARANTIZADO) beneficioCentrales[numCentral] -= c.getConsumo()*VEnergia.getTarifaClienteGarantizada(c.getTipo());
+          else beneficioCentrales[numCentral] -= c.getConsumo()*VEnergia.getTarifaClienteNoGarantizada(c.getTipo());
       }
-    }
-
-    private double calculaPerdues(int clientX, int clientY, int centralX, int centralY){
-      int x = abs(clientX - centralX);
-      int y = abs(clientY - centralY);
-      int d = sqrt(x*x + y*y);
-
-      if(d <= 10) return 0;
-      else if(d <= 25) return 0.1;
-      else if(d <= 50) return 0.2;
-      else if(d <= 75) return 0.4;
-      else return 0.6;
-    }
-
-    private bool ultimClient(int numCentral, int[] assigClients){
-      for(int i = 0; i < assigClients.size(); ++i) if(assigClients[i] == numCentral) return false;
-      return true;
     }
 }
