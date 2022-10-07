@@ -12,7 +12,7 @@ public class Sucesores implements SuccessorFunction {
 
         //Operador desassiganr
         for(int i = 0; i < estatActual.getAsignacionClientes().size(); ++i){
-          Estado nouEstat = estatActual;
+          Estado nouEstat = new Estado(estatActual);
           nouEstat.desassignar(i); //On i representa el client a desassignar
           sucesores.add(nouEstat);
         }
