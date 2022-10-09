@@ -5,6 +5,8 @@ import IA.Energia.Cliente;
 import IA.Energia.VEnergia;
 
 public class Utils {
+    public static final int NO_ASIGNADO = -1;
+
     public static double beneficioFromClienteToCentral(Cliente cliente, Central central) {
         try {
             double consumo = cliente.getConsumo();

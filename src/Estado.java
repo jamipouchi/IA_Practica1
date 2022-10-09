@@ -2,6 +2,8 @@ import Generadores.GeneradorEstadoInicial;
 import IA.Energia.Centrales;
 import IA.Energia.Clientes;
 
+import static Utils.Utils.*;
+
 public class Estado {
     private static Centrales centrales;
     private static Clientes clientes;
