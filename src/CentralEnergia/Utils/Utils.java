@@ -30,4 +30,10 @@ public class Utils {
         double perdida = VEnergia.getPerdida(distancia);
         return consumo * (1 + perdida);
     }
+
+    public static double distanciaFromClienteToCentral(Cliente cliente, Central central) {
+        double AX = cliente.getCoordX() - central.getCoordX();
+        double AY = cliente.getCoordY() - central.getCoordY();
+        return Math.pow(AX, 2) + Math.pow(AY, 2);
+    }
 }

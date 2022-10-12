@@ -1,5 +1,6 @@
 import java.util.List;
 
+import CentralEnergia.Estado;
 import aima.search.framework.SuccessorFunction;
 
 public class Sucesores implements SuccessorFunction {

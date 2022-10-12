@@ -1,8 +1,7 @@
 package CentralEnergia.Heuristica;
 
-import aima.search.framework.HeuristicFunction;
-
 import CentralEnergia.Estado;
+import aima.search.framework.HeuristicFunction;
 
 public class MaximizarBeneficio implements HeuristicFunction {
 

@@ -59,4 +59,12 @@ public class Estado {
     public double[] getBeneficioCentrales() {
         return beneficioCentrales;
     }
+
+    public static Clientes getClientes() {
+        return clientes;
+    }
+
+    public static Centrales getCentrales() {
+        return centrales;
+    }
 }
