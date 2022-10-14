@@ -91,7 +91,8 @@ public class Estado {
         if(ce.getProduccion() >= distribucionCentrales[numCentral] + consumClient){ //Si producció actual + demanda client no supera producció total
            asignacionClientes[numClient] = numCentral;
            distribucionCentrales[numCentral] += consumClient;
-           beneficioCentrales[numCentral] += c.getConsumo()*VEnergia.getTarifaClienteNoGarantizada(c.getTipo());
+           if(c.getContrato() != Cliente.GARANTIZADO) beneficioCentrales[numCentral] += c.getConsumo()*VEnergia.getTarifaClienteNoGarantizada(c.getTipo());
+           else beneficioCentrales[numCentral] += c.getConsumo()*VEnergia.getTarifaClienteGarantizada(c.getTipo());
             return true;
         }
         return false;
