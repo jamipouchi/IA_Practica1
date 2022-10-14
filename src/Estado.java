@@ -91,24 +91,13 @@ public class Estado {
         int numCentral1 =  asignacionClientes[numClient1];
         int numCentral2 =  asignacionClientes[numClient2];
         
-        bool client1old = false;
-        bool client2old = false;
-        
-        if(numCentral1 != -1) {
-            this.desassignar(numClient1);
-            client1old = true;
-        }
-            
-        if(numCentral2 != -1) {
-            this.desassignar(numClient2);
-            client2old = true;
-        }
-        
-        if(client2old) this.assignar(numClient1, numCentral2);
-        
-        if(client1old) this.assignar(numClient2, numCentral1);
-      
-      
-    }
     
+        bool client1old = this.desassignar(numClient1);   
+        bool client2old =  this.desassignar(numClient2);
+       
+       
+        if(client2old) this.assignar(numClient1, numCentral2);
+        if(client1old) this.assignar(numClient2, numCentral1);      
+    }
+   
 }
