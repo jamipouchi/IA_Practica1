@@ -55,7 +55,7 @@ public class Estado {
         return beneficioCentrales;
     }
     
-    public void desassignar(int numClient) {
+    public bool desassignar(int numClient) {
       if(asignacionClientes[numClient] != -1){
         int numCentral = asignacionClientes[numClient]
         asignacionClientes[numClient] = -1;
@@ -64,13 +64,13 @@ public class Estado {
 
         double consumClient = produccionNecesariaToClienteFromCentral(c, ce);
         distribucionCentrales[numCentral] -= consumClient;
-        //if(c.getContrato() == Cliente.GARANTIZADO) beneficioCentrales[numCentral] -= c.getConsumo()*VEnergia.getTarifaClienteGarantizada(c.getTipo());
-          //else beneficioCentrales[numCentral] -= c.getConsumo()*VEnergia.getTarifaClienteNoGarantizada(c.getTipo());
-          beneficioCentrales[numCentral] -= c.getConsumo()*VEnergia.getTarifaClienteNoGarantizada(c.getTipo());
+        beneficioCentrales[numCentral] -= c.getConsumo()*VEnergia.getTarifaClienteNoGarantizada(c.getTipo());
+        return true;
       }
+        return false;
     }
     
-    public void assignar(int numClient, int numCentral){
+    public bool assignar(int numClient, int numCentral){
      
         Cliente c = clientes.get(numClient);
         Central ce = centrales.get(numCentral);
@@ -80,8 +80,35 @@ public class Estado {
            asignacionClientes[numClient] = numCentral;
            distribucionCentrales[numCentral] += consumClient;
            beneficioCentrales[numCentral] += c.getConsumo()*VEnergia.getTarifaClienteNoGarantizada(c.getTipo());
+            return true;
         }
+        return false;
     }
     
+    
+    public void swap(int numClient1, int numClient2){
+            
+        int numCentral1 =  asignacionClientes[numClient1];
+        int numCentral2 =  asignacionClientes[numClient2];
+        
+        bool client1old = false;
+        bool client2old = false;
+        
+        if(numCentral1 != -1) {
+            this.desassignar(numClient1);
+            client1old = true;
+        }
+            
+        if(numCentral2 != -1) {
+            this.desassignar(numClient2);
+            client2old = true;
+        }
+        
+        if(client2old) this.assignar(numClient1, numCentral2);
+        
+        if(client1old) this.assignar(numClient2, numCentral1);
+      
+      
+    }
     
 }
