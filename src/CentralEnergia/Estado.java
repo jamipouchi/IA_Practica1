@@ -1,6 +1,11 @@
-import Generadores.GeneradorEstadoInicial;
+package CentralEnergia;
+
 import IA.Energia.Centrales;
 import IA.Energia.Clientes;
+
+import static CentralEnergia.Utils.Utils.*;
+
+import CentralEnergia.Generadores.GeneradorEstadoInicial;
 
 public class Estado {
     private static Centrales centrales;
@@ -53,5 +58,13 @@ public class Estado {
 
     public double[] getBeneficioCentrales() {
         return beneficioCentrales;
+    }
+
+    public static Clientes getClientes() {
+        return clientes;
+    }
+
+    public static Centrales getCentrales() {
+        return centrales;
     }
 }

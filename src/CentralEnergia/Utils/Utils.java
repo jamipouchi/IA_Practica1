@@ -1,30 +1,24 @@
-package Utils;
+package CentralEnergia.Utils;
 
 import IA.Energia.Central;
 import IA.Energia.Cliente;
 import IA.Energia.VEnergia;
 
 public class Utils {
+    public static final int NO_ASIGNADO = -1;
+
     public static double beneficioFromClienteToCentral(Cliente cliente, Central central) {
         try {
             double consumo = cliente.getConsumo();
-            double tarifa = VEnergia.getTarifaClienteGarantizada(cliente.getTipo());
-            double ganancias = consumo * tarifa;
-            double coste = costeProduccionToClienteFromCentral(cliente, central);
-            return ganancias - coste;
+            double tarifa;
+            if (cliente.getContrato() == Cliente.GARANTIZADO) {
+                tarifa = VEnergia.getTarifaClienteGarantizada(cliente.getTipo());
+            } else {
+                tarifa = VEnergia.getTarifaClienteNoGarantizada(cliente.getTipo());
+            }
+            return consumo * tarifa;
         } catch (Exception e) {
             // Esto nunca pasara. Es excepcion de getTarifa por tipo incorrecto de cliente
-            return -1;
-        }
-    }
-
-    public static double costeProduccionToClienteFromCentral(Cliente cliente, Central central) {
-        try {
-            double produccion = produccionNecesariaToClienteFromCentral(cliente, central);
-            double costeMW = VEnergia.getCosteProduccionMW(central.getTipo());
-            return produccion * costeMW;
-        } catch (Exception e) {
-            // Esto nunca pasara. Es excepcion de getCoste por tipo incorrecto de central
             return -1;
         }
     }
@@ -35,5 +29,11 @@ public class Utils {
                 + Math.pow(central.getCoordY() - cliente.getCoordY(), 2));
         double perdida = VEnergia.getPerdida(distancia);
         return consumo * (1 + perdida);
+    }
+
+    public static double distanciaFromClienteToCentral(Cliente cliente, Central central) {
+        double AX = cliente.getCoordX() - central.getCoordX();
+        double AY = cliente.getCoordY() - central.getCoordY();
+        return Math.pow(AX, 2) + Math.pow(AY, 2);
     }
 }

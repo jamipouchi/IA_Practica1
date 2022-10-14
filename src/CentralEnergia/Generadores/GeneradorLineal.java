@@ -1,4 +1,4 @@
-package Generadores;
+package CentralEnergia.Generadores;
 
 public class GeneradorLineal extends GeneradorEstadoInicial {
 

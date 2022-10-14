@@ -1,4 +1,6 @@
-import Generadores.*;
+package CentralEnergia;
+
+import CentralEnergia.Generadores.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
