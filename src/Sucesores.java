@@ -17,6 +17,13 @@ public class Sucesores implements SuccessorFunction {
           sucesores.add(nouEstat);
         }
 
+        //Operador assignar
+        for(int i = 0; i < estatActual.getAsignacionClientes().size(); ++i){
+          Estado nouEstat = new Estado(estatActual);
+          nouEstat.assignar(i); //On i representa el client a assignar
+          sucesores.add(nouEstat);
+        }
+        
         return sucesores;
     }
 }
