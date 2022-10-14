@@ -40,12 +40,13 @@ public class Sucesores implements SuccessorFunction {
                     bool esValid = true;
                     if(estatActual.clientGarantitzat(i) or estatActual.clientGarantitzat(j)){
                         if(assignacioClients[i] == -1 or assignacioClients[j] == -1) esValid = false;
-                    }
+                    
                  
                     if(esValid){
                       Estado nouEstat = new Estado(estatActual);
                       nouEstat.swap(i, j);
                       sucesores.add(nouEstat);
+                    }
                     }
                 }
             }
