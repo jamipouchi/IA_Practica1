@@ -99,7 +99,7 @@ public class Estado {
     }
     
     
-    public void swap(int numClient1, int numClient2){
+    public bool swap(int numClient1, int numClient2){
             
         int numCentral1 =  asignacionClientes[numClient1];
         int numCentral2 =  asignacionClientes[numClient2];
