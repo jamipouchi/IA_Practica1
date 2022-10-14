@@ -44,8 +44,8 @@ public class Sucesores implements SuccessorFunction {
                  
                     if(esValid){
                       Estado nouEstat = new Estado(estatActual);
-                      nouEstat.swap(i, j);
-                      sucesores.add(nouEstat);
+                      if(nouEstat.swap(i, j)) sucesores.add(nouEstat);
+                      
                     }
                     }
                 }
