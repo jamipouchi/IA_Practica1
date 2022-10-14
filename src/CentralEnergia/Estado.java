@@ -1,7 +1,10 @@
 package CentralEnergia;
 
+import IA.Energia.Central;
 import IA.Energia.Centrales;
+import IA.Energia.Cliente;
 import IA.Energia.Clientes;
+import IA.Energia.VEnergia;
 
 import static CentralEnergia.Utils.Utils.*;
 
@@ -58,6 +61,81 @@ public class Estado {
 
     public double[] getBeneficioCentrales() {
         return beneficioCentrales;
+    }
+
+    public Boolean clientGarantitzat(int numClient) {
+        Cliente c = clientes.get(numClient);
+        return c.getContrato() == Cliente.GARANTIZADO;
+    }
+
+    public int getSizeCentrales() {
+        return centrales.size();
+    }
+
+    public Boolean desassignar(int numClient) {
+        try {
+            Cliente c = clientes.get(numClient);
+            if (asignacionClientes[numClient] != -1) {
+                int numCentral = asignacionClientes[numClient];
+                Central ce = centrales.get(numCentral);
+
+                asignacionClientes[numClient] = -1;
+                double consumClient = produccionNecesariaToClienteFromCentral(c, ce);
+                distribucionCentrales[numCentral] -= consumClient;
+
+                beneficioCentrales[numCentral] -= c.getConsumo() * VEnergia.getTarifaClienteNoGarantizada(c.getTipo());
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            // Excepcion de tipo, no ocurrira
+            return false;
+        }
+    }
+
+    public Boolean assignar(int numClient, int numCentral) {
+        try {
+
+            Cliente c = clientes.get(numClient);
+            Central ce = centrales.get(numCentral);
+
+            double consumClient = produccionNecesariaToClienteFromCentral(c, ce);
+            if (ce.getProduccion() >= distribucionCentrales[numCentral] + consumClient) { // Si producció actual +
+                                                                                          // demanda client no supera
+                                                                                          // producció total
+                asignacionClientes[numClient] = numCentral;
+                distribucionCentrales[numCentral] += consumClient;
+                if (c.getContrato() != Cliente.GARANTIZADO)
+                    beneficioCentrales[numCentral] += c.getConsumo()
+                            * VEnergia.getTarifaClienteNoGarantizada(c.getTipo());
+                else
+                    beneficioCentrales[numCentral] += c.getConsumo()
+                            * VEnergia.getTarifaClienteGarantizada(c.getTipo());
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            // Excepcion de tipo, no ocurrira
+            return false;
+        }
+    }
+
+    public Boolean swap(int numClient1, int numClient2) {
+
+        int numCentral1 = asignacionClientes[numClient1];
+        int numCentral2 = asignacionClientes[numClient2];
+
+        Boolean client1old = this.desassignar(numClient1);
+        Boolean client2old = this.desassignar(numClient2);
+
+        Boolean assig1 = true;
+        Boolean assig2 = true;
+
+        if (client2old)
+            assig1 = this.assignar(numClient1, numCentral2);
+        if (client1old)
+            assig2 = this.assignar(numClient2, numCentral1);
+        return (assig1 && assig2);
     }
 
     public static Clientes getClientes() {
