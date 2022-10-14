@@ -50,6 +50,7 @@ public class Sucesores implements SuccessorFunction {
                     }
                 }
             }
+        }
         return sucesores;
        }
 }
