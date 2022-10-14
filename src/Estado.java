@@ -64,12 +64,24 @@ public class Estado {
 
         double consumClient = produccionNecesariaToClienteFromCentral(c, ce);
         distribucionCentrales[numCentral] -= consumClient;
-        if(c.getContrato() == Cliente.GARANTIZADO) beneficioCentrales[numCentral] -= c.getConsumo()*VEnergia.getTarifaClienteGarantizada(c.getTipo());
-          else beneficioCentrales[numCentral] -= c.getConsumo()*VEnergia.getTarifaClienteNoGarantizada(c.getTipo());
+        //if(c.getContrato() == Cliente.GARANTIZADO) beneficioCentrales[numCentral] -= c.getConsumo()*VEnergia.getTarifaClienteGarantizada(c.getTipo());
+          //else beneficioCentrales[numCentral] -= c.getConsumo()*VEnergia.getTarifaClienteNoGarantizada(c.getTipo());
+          beneficioCentrales[numCentral] -= c.getConsumo()*VEnergia.getTarifaClienteNoGarantizada(c.getTipo());
       }
     }
     
-    public void assignar(int numClient){
-     if(   
+    public void assignar(int numClient, int numCentral){
+     
+        Cliente c = clientes.get(numClient);
+        Central ce = centrales.get(numCentral);
+        
+        double consumClient = produccionNecesariaToClienteFromCentral(c, ce);
+        if(ce.getProduccion() >= distribucionCentrales[numCentral] + consumClient){ //Si producció actual + demanda client no supera producció total
+           asignacionClientes[numClient] = numCentral;
+           distribucionCentrales[numCentral] += consumClient;
+           beneficioCentrales[numCentral] += c.getConsumo()*VEnergia.getTarifaClienteNoGarantizada(c.getTipo());
+        }
     }
+    
+    
 }
