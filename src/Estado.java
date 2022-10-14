@@ -55,13 +55,25 @@ public class Estado {
         return beneficioCentrales;
     }
     
+    public bool clientGarantitzat(int numClient) {
+        Cliente c = estatActual.clientes.get(numClient);
+        return c.getContrato() == Cliente.GARANTIZADO;
+
+    }
+    
+    
+    public int getSizeCentrales(){
+     return centrales.size();   
+    }
+    
     public bool desassignar(int numClient) {
+      
+      Cliente c = clientes.get(numClient);
       if(asignacionClientes[numClient] != -1){
         int numCentral = asignacionClientes[numClient]
-        asignacionClientes[numClient] = -1;
-        Cliente c = clientes.get(numClient);
         Central ce = centrales.get(numCentral);
-
+         
+        asignacionClientes[numClient] = -1;
         double consumClient = produccionNecesariaToClienteFromCentral(c, ce);
         distribucionCentrales[numCentral] -= consumClient;
         beneficioCentrales[numCentral] -= c.getConsumo()*VEnergia.getTarifaClienteNoGarantizada(c.getTipo());
@@ -93,11 +105,12 @@ public class Estado {
         
     
         bool client1old = this.desassignar(numClient1);   
-        bool client2old =  this.desassignar(numClient2);
+        bool client2old = this.desassignar(numClient2);
        
        
         if(client2old) this.assignar(numClient1, numCentral2);
-        if(client1old) this.assignar(numClient2, numCentral1);      
+        if(client1old) this.assignar(numClient2, numCentral1);
+        return (client1old and client2old);
     }
    
 }
