@@ -68,4 +68,8 @@ public class Estado {
           else beneficioCentrales[numCentral] -= c.getConsumo()*VEnergia.getTarifaClienteNoGarantizada(c.getTipo());
       }
     }
+    
+    public void assignar(int numClient){
+     if(   
+    }
 }
