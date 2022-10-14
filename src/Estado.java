@@ -106,11 +106,14 @@ public class Estado {
     
         bool client1old = this.desassignar(numClient1);   
         bool client2old = this.desassignar(numClient2);
+        
+        bool assig1 = true;
+        bool assig2 = true;
+
        
-       
-        if(client2old) this.assignar(numClient1, numCentral2);
-        if(client1old) this.assignar(numClient2, numCentral1);
-        return (client1old and client2old);
+        if(client2old) assig1 = this.assignar(numClient1, numCentral2);
+        if(client1old) assig2 = this.assignar(numClient2, numCentral1);
+        return (assig1 and assig2);
     }
    
 }
