@@ -1,6 +1,14 @@
-import Generadores.GeneradorEstadoInicial;
+package CentralEnergia;
+
+import IA.Energia.Central;
 import IA.Energia.Centrales;
+import IA.Energia.Cliente;
 import IA.Energia.Clientes;
+import IA.Energia.VEnergia;
+
+import static CentralEnergia.Utils.Utils.*;
+
+import CentralEnergia.Generadores.GeneradorEstadoInicial;
 
 public class Estado {
     private static Centrales centrales;
@@ -55,8 +63,8 @@ public class Estado {
         return beneficioCentrales;
     }
     
-    public bool clientGarantitzat(int numClient) {
-        Cliente c = estatActual.clientes.get(numClient);
+    public Boolean clientGarantitzat(int numClient) {
+        Cliente c = clientes.get(numClient);
         return c.getContrato() == Cliente.GARANTIZADO;
 
     }
@@ -66,7 +74,7 @@ public class Estado {
      return centrales.size();   
     }
     
-    public bool desassignar(int numClient) {
+    public Boolean desassignar(int numClient) {
       
       Cliente c = clientes.get(numClient);
       if(asignacionClientes[numClient] != -1){
@@ -82,7 +90,8 @@ public class Estado {
         return false;
     }
     
-    public bool assignar(int numClient, int numCentral){
+    public Boolean assignar(int numClient, int numCentral){
+        try {
      
         Cliente c = clientes.get(numClient);
         Central ce = centrales.get(numCentral);
@@ -96,25 +105,37 @@ public class Estado {
             return true;
         }
         return false;
+    } catch (Exception e) {
+        // Excepcion de tipo, no ocurrira
+        return false;
+    }
     }
     
     
-    public bool swap(int numClient1, int numClient2){
+    public Boolean swap(int numClient1, int numClient2){
             
         int numCentral1 =  asignacionClientes[numClient1];
         int numCentral2 =  asignacionClientes[numClient2];
         
     
-        bool client1old = this.desassignar(numClient1);   
-        bool client2old = this.desassignar(numClient2);
+        Boolean client1old = this.desassignar(numClient1);   
+        Boolean client2old = this.desassignar(numClient2);
         
-        bool assig1 = true;
-        bool assig2 = true;
+        Boolean assig1 = true;
+        Boolean assig2 = true;
 
        
         if(client2old) assig1 = this.assignar(numClient1, numCentral2);
         if(client1old) assig2 = this.assignar(numClient2, numCentral1);
-        return (assig1 and assig2);
+        return (assig1 && assig2);
     }
    
+
+    public static Clientes getClientes() {
+        return clientes;
+    }
+
+    public static Centrales getCentrales() {
+        return centrales;
+    }
 }

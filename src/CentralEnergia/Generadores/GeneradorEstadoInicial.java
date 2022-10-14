@@ -1,4 +1,6 @@
-package Generadores;
+package CentralEnergia.Generadores;
+
+import static CentralEnergia.Utils.Utils.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +10,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import IA.Energia.Centrales;
 import IA.Energia.Cliente;
 import IA.Energia.Clientes;
-import Utils.Utils;
 
 public abstract class GeneradorEstadoInicial {
     Clientes clientes;
@@ -18,7 +19,6 @@ public abstract class GeneradorEstadoInicial {
     protected double[] beneficioCentrales;
 
     protected Boolean[] centralesUsadas;
-    private static final int NO_ASIGNADO = -1;
 
     public void creaEstadoInicial(Clientes clientes, Centrales centrales) throws Exception {
         this.clientes = clientes;
@@ -59,16 +59,16 @@ public abstract class GeneradorEstadoInicial {
     }
 
     protected Boolean sePuedeAsignarClienteToCentral(int idxCliente, int idxCentral) {
-        double distribucionExtra = Utils.produccionNecesariaToClienteFromCentral(clientes.get(idxCliente),
+        double distribucionExtra = produccionNecesariaToClienteFromCentral(clientes.get(idxCliente),
                 centrales.get(idxCentral));
         return distribucionCentrales[idxCentral] + distribucionExtra <= centrales.get(idxCentral).getProduccion();
     }
 
     protected void asignaClienteToCentral(int idxCliente, int idxCentral) {
         asignacionClientes[idxCliente] = idxCentral;
-        distribucionCentrales[idxCentral] += Utils.produccionNecesariaToClienteFromCentral(clientes.get(idxCliente),
+        distribucionCentrales[idxCentral] += produccionNecesariaToClienteFromCentral(clientes.get(idxCliente),
                 centrales.get(idxCentral));
-        beneficioCentrales[idxCentral] += Utils.beneficioFromClienteToCentral(clientes.get(idxCliente),
+        beneficioCentrales[idxCentral] += beneficioFromClienteToCentral(clientes.get(idxCliente),
                 centrales.get(idxCentral));
     }
 

@@ -1,4 +1,4 @@
-package Generadores;
+package CentralEnergia.Generadores;
 
 import java.util.ArrayList;
 
