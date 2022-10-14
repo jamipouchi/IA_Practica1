@@ -28,6 +28,27 @@ public class Sucesores implements SuccessorFunction {
               }
            }
         }
+        
+        
+        
+                //Operador SWAP
+        for(int i = 0; i < estatActual.getAsignacionClientes().size(); ++i){
+            int[] assignacioClients = estatActual.getAsignacionClientes();
+            
+              for(int j = i; j < estatActual.getAsignacionClientes().size(); ++j){
+                if(assignacioClients[j] != -1 or assignacioClients[i] != -1){  
+                    bool esValid = true;
+                    if((estatActual.clientes[i].getContrato() == Cliente.GARANTIZADO or estatActual.clientes[j].getContrato() == Cliente.GARANTIZADO)){
+                        if(assignacioClients[i] == -1 or assignacioClients[j] == -1) esValid = false;
+                    }
+                 
+                    if(esValid){
+                      Estado nouEstat = new Estado(estatActual);
+                      nouEstat.swap(i, j); //On i representa el client a assignar
+                      sucesores.add(nouEstat);
+                    }
+                }
+            }
         return sucesores;
-    }
+       }
 }
