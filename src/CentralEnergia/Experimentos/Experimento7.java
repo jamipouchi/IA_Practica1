@@ -21,7 +21,7 @@ public class Experimento7 {
         int t1 = 5;
         int t2 = 10;
         int t3 = 25;
-        int numClientes = 500;
+        int numClientes = 1000;
         double p1 = 0.25;
         double p2 = 0.3;
         double p3 = 0.45;
@@ -34,6 +34,7 @@ public class Experimento7 {
     }
 
     private static void centralEnergiaHillClimbingSearch(Estado estadoInicial) {
+        long startTime = System.currentTimeMillis();
         try {
             Problem problem = new Problem(estadoInicial, new GeneradoraSucesores(), new CentralEnergiaGoalTest(),
                     new MaximizarAsignaciones());
@@ -48,6 +49,8 @@ public class Experimento7 {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        long endTime = System.currentTimeMillis();
+        System.out.println("That took " + (endTime - startTime) + " milliseconds");
     }
 
     private static void printInstrumentation(Properties properties) {

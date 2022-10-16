@@ -90,7 +90,7 @@ public class Estado {
         Boolean desasignarCliente1 = this.desasignar(idxCliente1);
         Boolean desasignarCliente2 = this.desasignar(idxCliente2);
 
-        if (!desasignarCliente1 && !desasignarCliente2) {
+        if (!desasignarCliente1 || !desasignarCliente2) {
             return false;
         }
 
@@ -126,7 +126,13 @@ public class Estado {
 
     public String toString() {
         MaximizarBeneficio calculadoraBeneficio = new MaximizarBeneficio();
-
-        return "Beneficio = " + -calculadoraBeneficio.getHeuristicValue(this);
+        int numServidos = 0;
+        for (int asignado : asignacionClientes) {
+            if (asignado != NO_ASIGNADO) {
+                numServidos += 1;
+            }
+        }
+        return "Servidos: " + numServidos;
+        // + "Beneficio = " + -calculadoraBeneficio.getHeuristicValue(this);
     }
 }

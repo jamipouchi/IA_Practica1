@@ -13,7 +13,7 @@ public class GeneradoraSucesores implements SuccessorFunction {
     public List getSuccessors(Object arg0) {
         Estado estadoActual = (Estado) arg0;
         ArrayList sucesores = new ArrayList();
- 
+
         // Operador desasignar
         for (int idxCliente = 0; idxCliente < estadoActual.getAsignacionClientes().length; ++idxCliente) {
             Estado nuevoEstado = new Estado(estadoActual);
