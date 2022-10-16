@@ -1,9 +1,10 @@
-package CentralEnergia;
+package CentralEnergia.Experimentos;
 
 import java.util.List;
 import java.util.Properties;
 import java.util.Iterator;
 
+import CentralEnergia.Estado;
 import CentralEnergia.GeneradoraSucesores.GeneradoraSucesores;
 import CentralEnergia.Generadores.*;
 import CentralEnergia.Goaltest.CentralEnergiaGoalTest;
@@ -13,13 +14,22 @@ import aima.search.framework.Search;
 import aima.search.framework.SearchAgent;
 import aima.search.informed.HillClimbingSearch;
 
-public class App {
+public class Experimento7 {
     public static void main(String[] args) throws Exception {
 
-        // GeneradorLineal generador = new GeneradorLineal();
         GeneradorGarantizadosRandomHastaLLenar generador = new GeneradorGarantizadosRandomHastaLLenar();
-        // GeneradorGarantizadosRandom generador = new GeneradorGarantizadosRandom();
-        Estado estadoInicial = new Estado(2, 2, 2, 200, 0.3, 0.4, 0.3, 0.2, generador, 1, 1);
+        int t1 = 5;
+        int t2 = 10;
+        int t3 = 25;
+        int numClientes = 500;
+        double p1 = 0.25;
+        double p2 = 0.3;
+        double p3 = 0.45;
+        double proporcionGarantizado = 0.75;
+        int semilla1 = 1234;
+        int semilla2 = 1234;
+        Estado estadoInicial = new Estado(t1, t2, t3, numClientes, p1, p2, p3, proporcionGarantizado, generador,
+                semilla1, semilla2);
         centralEnergiaHillClimbingSearch(estadoInicial);
     }
 
@@ -27,9 +37,11 @@ public class App {
         try {
             Problem problem = new Problem(estadoInicial, new GeneradoraSucesores(), new CentralEnergiaGoalTest(),
                     new MaximizarAsignaciones());
+            System.out.println("problem build");
             Search search = new HillClimbingSearch();
+            System.out.println("search build");
             SearchAgent agent = new SearchAgent(problem, search);
-
+            System.out.println("agent build");
             System.out.println();
             printActions(agent.getActions());
             printInstrumentation(agent.getInstrumentation());

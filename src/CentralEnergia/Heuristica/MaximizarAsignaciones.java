@@ -9,7 +9,7 @@ public class MaximizarAsignaciones implements HeuristicFunction {
     @Override
     public double getHeuristicValue(Object arg0) {
         Estado estado = (Estado) arg0;
-        int noAsignados = 0;
+        double noAsignados = 0;
         int[] asignacionClientes = estado.getAsignacionClientes();
         for (int asignacion : asignacionClientes) {
             if (asignacion == NO_ASIGNADO) {
