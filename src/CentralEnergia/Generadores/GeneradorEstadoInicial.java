@@ -50,7 +50,7 @@ public abstract class GeneradorEstadoInicial {
     protected ArrayList<Integer> seleccionRandomIdxClientesGarantizados() {
         ArrayList<Integer> idxClientesPorAsignar = new ArrayList<Integer>();
         for (int idxCliente = 0; idxCliente < clientes.size(); idxCliente++) {
-            if (clientes.get(idxCliente).getTipo() == Cliente.GARANTIZADO) {
+            if (clientes.get(idxCliente).getContrato() == Cliente.GARANTIZADO) {
                 idxClientesPorAsignar.add(idxCliente);
             }
         }
