@@ -15,6 +15,6 @@ public class MaximizarUsoEnergia implements HeuristicFunction {
             double porcentajeDeUso = (energiaProducida - distribucionCentrales[idxCentral]) / energiaProducida;
             energiaNoUsada += (porcentajeDeUso) * Math.log(porcentajeDeUso);
         }
-        return energiaNoUsada;
+        return -energiaNoUsada;
     }
 }
