@@ -30,15 +30,15 @@ PER CANVIAR CONFIGURACIONS:
       
       - Nombre de clients
       
-      - Proporcio de clients de cada tipus
+      - Proporció de clients de cada tipus
       
-      - Proporcio de clients garantitzats
+      - Proporció de clients garantitzats
       
       - Seed
       
     La línia 42 canvia l'heurístic. Opcions:
     
-           new MaximitzarBenefici());
+           new MaximizarBeneficio());
            
            new LaCombiPerfecta());
            
