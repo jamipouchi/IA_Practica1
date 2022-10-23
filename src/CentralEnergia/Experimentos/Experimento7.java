@@ -19,7 +19,7 @@ import aima.search.informed.HillClimbingSearch;
 public class Experimento7 {
     public static void main(String[] args) throws Exception {
 
-        GeneradorGarantizadosRandom generador = new GeneradorGarantizadosRandom();
+        GeneradorLineal generador = new GeneradorLineal();
         int t1 = 5;
         int t2 = 10;
         int t3 = 25;
@@ -39,7 +39,7 @@ public class Experimento7 {
         long startTime = System.currentTimeMillis();
         try {
             Problem problem = new Problem(estadoInicial, new GeneradoraSucesores(), new CentralEnergiaGoalTest(),
-                    new LaCombiPerfecta());
+                    new MaximitzarBenefici());
             System.out.println("problem build");
             Search search = new HillClimbingSearch();
             System.out.println("search build");
