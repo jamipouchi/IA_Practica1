@@ -2,6 +2,7 @@ IA Pràctica 1 - cerca local
 
 Abel Batalla, Miquel Puig i Arnau Gràcia
 
+----
 
 PER EXECUTAR:
 
@@ -9,6 +10,7 @@ PER EXECUTAR:
 
 (IA_Practica1/src/CentralEnergia/Experimentos/Experimento7.java)
 
+----
 
 PER CANVIAR CONFIGURACIONS:
 
