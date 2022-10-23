@@ -34,8 +34,8 @@ public class GeneradoraSucesores implements SuccessorFunction {
             }
         }
 
-
-        //swap modern
+        /*
+        //Operador smartSwap
         for (int idxCliente1 = 0; idxCliente1 < estadoActual.getAsignacionClientes().length; ++idxCliente1) {
             int[] assig = estadoActual.getAsignacionClientes();
             if (assig[idxCliente1] != NO_ASIGNADO) {
@@ -47,8 +47,7 @@ public class GeneradoraSucesores implements SuccessorFunction {
                 }
             }
         }
-
-
+        */
 
 
         /*
@@ -61,8 +60,8 @@ public class GeneradoraSucesores implements SuccessorFunction {
                 }
             }
         }
-
-         */
+        */
+        
         return sucesores;
     }
 }
