@@ -11,6 +11,7 @@ import CentralEnergia.Goaltest.CentralEnergiaGoalTest;
 import CentralEnergia.Heuristica.CombiPenalitzacio;
 import CentralEnergia.Heuristica.LaCombiPerfecta;
 import CentralEnergia.Heuristica.MaximizarAsignaciones;
+import CentralEnergia.Heuristica.MaximizarBeneficio;
 import aima.search.framework.Problem;
 import aima.search.framework.Search;
 import aima.search.framework.SearchAgent;
