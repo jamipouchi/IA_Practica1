@@ -1,5 +1,5 @@
 IA Pràctica 1 - cerca local
-Abel Batalla, Miquel Puig i Arnau Gràcia
+  Abel Batalla, Miquel Puig i Arnau Gràcia
 
 PER EXECUTAR:
 "Run" des del fitxer Experimento7.java
