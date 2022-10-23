@@ -9,7 +9,6 @@ import IA.Energia.Clientes;
 import static CentralEnergia.Utils.Utils.*;
 import static IA.Energia.Cliente.GARANTIZADO;
 
-import CentralEnergia.Heuristica.MaximizarBeneficio;
 import CentralEnergia.Generadores.GeneradorEstadoInicial;
 
 public class Estado {
@@ -60,7 +59,8 @@ public class Estado {
             return false;
         }
         Cliente clienteToDesasignar = clientes.get(idxCliente);
-        if (clienteToDesasignar.getContrato() == GARANTIZADO) return false;
+        if (clienteToDesasignar.getContrato() == GARANTIZADO)
+            return false;
         int idxCentral = asignacionClientes[idxCliente];
         Central centralToDesasignar = centrales.get(idxCentral);
         asignacionClientes[idxCliente] = NO_ASIGNADO;
@@ -104,16 +104,17 @@ public class Estado {
 
     public Boolean swapmodern(int idxCliente1, int idxCentralnova) {
         int idxCentralantiga = asignacionClientes[idxCliente1];
-        if (idxCentralantiga == idxCentralnova) return false;
+        if (idxCentralantiga == idxCentralnova)
+            return false;
 
         Boolean desasignarCliente1 = this.desasignar_enswap(idxCliente1);
-        if (!desasignarCliente1) return false;
+        if (!desasignarCliente1)
+            return false;
 
         Boolean asignarCliente1 = this.asignar(idxCliente1, idxCentralnova);
 
         return (asignarCliente1);
     }
-
 
     public Boolean swap(int idxCliente1, int idxCliente2) {
         int idxCentral1 = asignacionClientes[idxCliente1];
@@ -167,8 +168,20 @@ public class Estado {
             }
         }
         return "Servidos: " + numServidos
-         + "  Beneficio: " + -calculadoraBeneficio.getHeuristicValue(this)
+                + "  Beneficio: " + -calculadoraBeneficio.getHeuristicValue(this)
                 + "  Distancia: " + calculadoraDistancia.getHeuristicValue(this)
-                + "  Rating: " + calculadoraRating.getHeuristicValue(this);
+                + "  Rating: " + calculadoraRating.getHeuristicValue(this)
+                + "  Garantizados: " + garantizadosNoAsignados();
+    }
+
+    int garantizadosNoAsignados() {
+        int noAsignados = 0;
+        for (int idxCliente = 0; idxCliente < clientes.size(); idxCliente++) {
+            if (asignacionClientes[idxCliente] == NO_ASIGNADO
+                    && clientes.get(idxCliente).getContrato() == Cliente.GARANTIZADO) {
+                noAsignados += 1;
+            }
+        }
+        return noAsignados;
     }
 }

@@ -4,7 +4,13 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
+        {
+            "type": "java",
+            "name": "Launch Experimento5",
+            "request": "launch",
+            "mainClass": "CentralEnergia.Experimentos.Experimento5",
+            "projectName": "CentralEnergia_d8116f62"
+        },
         {
             "type": "java",
             "name": "Launch Current File",
