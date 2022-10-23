@@ -39,7 +39,7 @@ public class Experimento7 {
         long startTime = System.currentTimeMillis();
         try {
             Problem problem = new Problem(estadoInicial, new GeneradoraSucesores(), new CentralEnergiaGoalTest(),
-                    new MaximitzarBenefici());
+                    new MaximizarBeneficio());
             System.out.println("problem build");
             Search search = new HillClimbingSearch();
             System.out.println("search build");
